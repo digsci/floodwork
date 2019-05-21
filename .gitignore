@@ -1,4 +1,9 @@
 __pycache__/
 data/*
 .ipynb_checkpoints/
+.bash_history
+.cache/
+.ipython/
+.jupyter/
+.local/
 
