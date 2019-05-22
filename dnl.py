@@ -260,51 +260,52 @@ def dnl_observation():
         }
     }
     """
-
+    
     query_existing_ead = """
-    prefix pd:  <http://ensembleprojects.org/ns/floodrisk/property_data#>
+    prefix pd:  <http://ensembleprojects.org/ds/ns/floodrisk/property_data#>
+    prefix dpd: <http://ensembleprojects.org/ns/floodrisk/property_data#>
     prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
     select  (sum(xsd:decimal(?ead_mean)) as ?ead_mean)
-    from <http://ensembleprojects.org/floodrisk/property>
+    from <http://ensembleprojects.org/ds/floodrisk/property>
     from <http://ensembleprojects.org/graph/floodrisk/damage#0>
     where {
         ?property pd:posttown "NEWARK" .
         ?property pd:station_name "COLWICK" .
         ?property pd:jbapropRef ?ref .
-        ?newProperty pd:propRef ?ref . 
-        ?newProperty pd:ead_mean ?ead_mean .
+        ?newProperty dpd:propRef ?ref . 
+        ?newProperty dpd:ead_mean ?ead_mean .
     }
     """
 
     query_new_ead = """
-    prefix pd:  <http://ensembleprojects.org/ns/floodrisk/property_data#>
-    prefix dd:  <http://ensembleprojects.org/ns/floodrisk/damage_data#>
+    prefix pd:  <http://ensembleprojects.org/ds/ns/floodrisk/property_data#>
+    prefix dpd: <http://ensembleprojects.org/ns/floodrisk/property_data#>
     prefix xsd: <http://www.w3.org/2001/XMLSchema#>
 
     select
         (sum(xsd:decimal(?ead)) as ?ead)
     where {
-        graph <http://ensembleprojects.org/floodrisk/property> {
+        graph <http://ensembleprojects.org/ds/floodrisk/property> {
             ?property pd:posttown "NEWARK" .
             ?property pd:station_name "COLWICK" .
             ?property pd:jbapropRef ?jbapropRef
         }
         graph <http://ensembleprojects.org/graph/floodrisk/damage#4> {
-            ?newProperty pd:propRef ?jbapropRef .
-            ?newProperty pd:ead ?ead 
+            ?newProperty dpd:propRef ?jbapropRef .
+            ?newProperty dpd:ead ?ead 
         }
     }
     """
 
     query_mapdata = """
-    prefix gd:    <http://ensembleprojects.org/ns/floodrisk/gauge_data#>
+    prefix gd:    <http://ensembleprojects.org/ds/ns/floodrisk/gauge_data#>
     prefix rt:    <http://environment.data.gov.uk/flood-monitoring/def/core/>
     prefix geo:   <http://www.w3.org/2003/01/geo/wgs84_pos#>
 
     select ?lat ?long ?label
-    from <http://ensembleprojects.org/floodrisk/gauge>
-    from <http://ensembleprojects.org/floodrisk/property>
+    from <http://ensembleprojects.org/ds/floodrisk/gauge>
+    from <http://ensembleprojects.org/ds/floodrisk/property>
     from <http://environment.data.gov.uk/flood-monitoring/id/stations.rdf>
     where {
         ?local_gauge gd:station_name "COLWICK" ;
@@ -317,10 +318,10 @@ def dnl_observation():
     """
 
     query_properties = """
-    prefix pd:  <http://ensembleprojects.org/ns/floodrisk/property_data#>
+    prefix pd:  <http://ensembleprojects.org/ds/ns/floodrisk/property_data#>
 
     select  ?jbapropRef ?bngeast ?bngnorth
-    from <http://ensembleprojects.org/floodrisk/property>
+    from <http://ensembleprojects.org/ds/floodrisk/property>
     from <http://ensembleprojects.org/graph/floodrisk/damage#0>
     where {
         ?property pd:posttown "NEWARK" ;
@@ -332,10 +333,10 @@ def dnl_observation():
     """
 
     query_property_detail = """
-    prefix pd:  <http://ensembleprojects.org/ns/floodrisk/property_data#>
+    prefix pd:  <http://ensembleprojects.org/ds/ns/floodrisk/property_data#>
 
     select  ?q2 ?q5 ?q10 ?q20 ?q50 ?q75 ?q100 ?q200 ?q1000
-    from <http://ensembleprojects.org/floodrisk/property>
+    from <http://ensembleprojects.org/ds/floodrisk/property>
     from <http://ensembleprojects.org/graph/floodrisk/damage#0>
     where {
         ?s pd:jbapropRef '51183' ;
