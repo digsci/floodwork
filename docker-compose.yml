@@ -1,0 +1,20 @@
+version: '3'
+services:
+  notebook:
+    image: "graham/jupyter-notebook-jba:1.0"
+    container_name: notebook
+    ports:
+      - "8888:8888"
+    volumes:
+      - ./:/home/jovyan
+  virtuoso-db:
+    image: "graham/virtuoso-db:1.0"
+    container_name: virtuoso-db
+    ports:
+      - "8890:8890"
+      - "1111:1111"
+    environment:
+      - DBA_PASSWORD=dba
+      - SPARQL_UPDATE=true
+    volumes:
+      - ./data:/data
