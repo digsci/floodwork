@@ -8,13 +8,13 @@ services:
     volumes:
       - ./:/home/jovyan
   virtuoso-db:
-    image: "graham/virtuoso-db:1.0"
+    image: "tenforce/virtuoso"
     container_name: virtuoso-db
     ports:
       - "8890:8890"
-      - "1111:1111"
     environment:
       - DBA_PASSWORD=dba
       - SPARQL_UPDATE=true
+      - VIRT_SPARQL_ExternalQuerySource=true
     volumes:
       - ./data:/data
