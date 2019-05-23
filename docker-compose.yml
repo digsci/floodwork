@@ -1,7 +1,7 @@
 version: '3'
 services:
   notebook:
-    image: "flood-notebook"
+    image: "flood-notebook:1.0"
     build: ./
     container_name: notebook
     ports:
