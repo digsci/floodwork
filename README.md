@@ -1,6 +1,6 @@
 **Flood Risk Management**
 
-A set of Jupyter notebooks and associated technologies used to demonstrate flexible integrated querying of flood risk data.
+Flood risk management system used to demonstrate flexible and integrated querying of flood risk data.
 
 ***Dependencies***
   
